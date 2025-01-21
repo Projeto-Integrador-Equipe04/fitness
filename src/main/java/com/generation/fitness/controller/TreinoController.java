@@ -47,7 +47,7 @@ public class TreinoController {
 	}
 	
 	@GetMapping("/exercicio/{exercicio}")
-	public ResponseEntity<List<Treino>> getByTitulo(@PathVariable String exercicio){
+	public ResponseEntity<List<Treino>> getByExercicio(@PathVariable String exercicio){
 		return ResponseEntity.ok(treinoRepository.findAllByExercicioContainingIgnoreCase(exercicio));
 	}
 	
@@ -60,10 +60,11 @@ public class TreinoController {
 
     @PutMapping
     public ResponseEntity<Treino> put(@Valid @RequestBody Treino treino){
-        return treinoRepository.findById(treino.getId())
-            .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-            .body(treinoRepository.save(treino)))
-            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    	return treinoRepository.findById(treino.getId())
+    			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
+    			.body(treinoRepository.save(treino)))
+    			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)
