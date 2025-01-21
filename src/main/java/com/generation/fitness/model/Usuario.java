@@ -39,6 +39,12 @@ public class Usuario {
 
 	@Size(max = 5000, message = "O link da foto não pode ser maior do que 5000 caracteres")
 	private String foto;
+	
+	@NotNull(message = "O atributo peso é obrigatório!")
+	private Double peso;
+	
+	@NotNull(message = "O atributo altura é obrigatório!")
+	private Double altura;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
@@ -86,6 +92,38 @@ public class Usuario {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
+	public Double getAltura() {
+		return altura;
+	}
+
+	public void setAltura(Double altura) {
+		this.altura = altura;
+	}
+
+	public List<Treino> getTreinos() {
+		return treinos;
+	}
+
+	public void setTreinos(List<Treino> treinos) {
+		this.treinos = treinos;
+	}
+
+	public Plano getPlano() {
+		return plano;
+	}
+
+	public void setPlano(Plano plano) {
+		this.plano = plano;
 	}
 
 
