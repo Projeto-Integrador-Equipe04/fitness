@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity 
@@ -22,8 +23,8 @@ public class Plano {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull(message = "O atributo nome do plano é obrigatório!")
-	private String nome;
+	@NotBlank(message = "O atributo nome do plano é obrigatório!")
+	private String nomePlano;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plano", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("plano")
@@ -37,12 +38,21 @@ public class Plano {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+
+	public String getNomePlano() {
+		return nomePlano;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomePlano(String nomePlano) {
+		this.nomePlano = nomePlano;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 	
 	

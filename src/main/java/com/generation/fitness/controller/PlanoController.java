@@ -18,55 +18,55 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.fitness.model.Tipo;
-import com.generation.fitness.repository.TipoRepository;
+import com.generation.fitness.model.Plano;
+import com.generation.fitness.repository.PlanoRepository;
+
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/tipo")
+@RequestMapping("/planos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class TipoController {
+public class PlanoController {
 
 	@Autowired
-	private TipoRepository tipoRepository;
+	private PlanoRepository planoRepository;
 	
 	//lista todos os tipos
 	@GetMapping
-	public ResponseEntity<List<Tipo>> getAll(){
+	public ResponseEntity<List<Plano>> getAll(){
 		
-		return ResponseEntity.ok(tipoRepository.findAll());
+		return ResponseEntity.ok(planoRepository.findAll());
 	}
 	
 	//Buscar por ID
 	@GetMapping("/{id}")
-	public ResponseEntity<Tipo> getById(@PathVariable Long id){
-		return tipoRepository.findById(id)
+	public ResponseEntity<Plano> getById(@PathVariable Long id){
+		return planoRepository.findById(id)
 				.map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
 	//buscar por nome
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<Tipo> buscarPorNome(@PathVariable String nome) {
-	    return tipoRepository.findByNome(nome)
-	            .map(tipo -> ResponseEntity.ok(tipo))
-	            .orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<List<Plano>> buscarPorNome(@PathVariable String nome) {
+	    return ResponseEntity.ok(planoRepository.findAllByNomePlanoContainingIgnoreCase(nome));
 	
 	}
 	
 	//Criar um novo tipo
 	@PostMapping
-	public ResponseEntity<Tipo> post (@Valid @RequestBody Tipo tipo){
+	public ResponseEntity<Plano> post (@Valid @RequestBody Plano plano){
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(tipoRepository.save(tipo));
+				.body(planoRepository.save(plano));
+		
 	}
 	//atualizar
 	 @PutMapping
-	    public ResponseEntity<Tipo> put(@Valid @RequestBody Tipo tipo){
-	        return tipoRepository.findById(tipo.getId())
+	    public ResponseEntity<Plano> put(@Valid @RequestBody Plano plano){
+	        return planoRepository.findById(plano.getId())
 	            .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-	            .body(tipoRepository.save(tipo)))
+	            .body(planoRepository.save(plano)))
 	            .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	  }
 	  
@@ -74,10 +74,10 @@ public class TipoController {
 	  @ResponseStatus(HttpStatus.NO_CONTENT)
 	  @DeleteMapping("/{id}")
 	   public void delete(@PathVariable Long id) {
-	        Optional<Tipo> tema = tipoRepository.findById(id);
-	        if(tema.isEmpty())
+	        Optional<Plano> plano = planoRepository.findById(id);
+	        if(plano.isEmpty())
 	            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-	        tipoRepository.deleteById(id);        
+	        planoRepository.deleteById(id);        
 	                
 	    }
 	  

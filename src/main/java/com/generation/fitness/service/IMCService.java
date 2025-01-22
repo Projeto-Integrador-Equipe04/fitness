@@ -1,5 +1,7 @@
 package com.generation.fitness.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,29 +28,31 @@ public class IMCService {
 	        Usuario usuario = usuarioOptional.get();
 	        double peso = usuario.getPeso();
 	        double altura = usuario.getAltura();
-
-	        if (peso <= 0 || altura <= 0) {
-	            throw new IllegalArgumentException("Peso e altura devem ser maiores que zero.");
-	        }
+	        
 
 	        double imc = peso / (altura * altura);
 	        String categoria = categorizarIMC(imc);
 
-	        return ResponseEntity.ok("IMC: " + imc + " - Categoria: " + categoria);
+	        BigDecimal imc2 = new BigDecimal(imc);
+	        imc2 = imc2.setScale(2, RoundingMode.HALF_UP);
+	        
+	        return ResponseEntity.ok("IMC: " + imc2 + " - Categoria: " + categoria);
 	    }
 
 	    // Categorizar o IMC
-	    private String categorizarIMC(double imc) {
-	        if (imc < 18.5) {
-	            return "Abaixo do peso";
-	        } else if (imc >= 18.5 && imc < 24.9) {
-	            return "Peso normal";
-	        } else if (imc >= 25.0 && imc < 29.9) {
-	            return "Sobrepeso";
-	        } else {
+	    private String categorizarIMC(double imc2) {
+	        if (imc2 < 18.5)
+	        return "Abaixo do peso";
+	        
+	        if (imc2 < 24.9) 
+	        return "Peso normal";
+	        
+	        if (imc2 < 29.9) 
+	        return "Sobrepeso";
+
 	            return "Obesidade";
 	        }
 	    }
 		
-	}
+	
 
