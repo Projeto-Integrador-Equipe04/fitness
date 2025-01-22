@@ -44,12 +44,12 @@ public class Usuario {
 	
 	@NotNull(message = "O atributo peso é obrigatório!")
 	@Min (1) 
-	@Max (5)
+	@Max (5000)
 	private Double peso;
 	
 	@NotNull(message = "O atributo altura é obrigatório!")
 	@Min (1) 
-	@Max (4)
+	@Max (3000)
 	private Double altura;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
