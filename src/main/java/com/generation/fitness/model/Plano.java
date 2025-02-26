@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity 
-@Table (name = "tb_planos")
+@Table (name = "TB_FITNESS_PLANO")
 public class Plano {
 	
 	@Id

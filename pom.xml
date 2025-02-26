@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.generation</groupId>
 	<artifactId>fitness</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>fitness</name>
 	<description>Projeto fitness</description>
 	<url/>
@@ -52,6 +52,11 @@
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
