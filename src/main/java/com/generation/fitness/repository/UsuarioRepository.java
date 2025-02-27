@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.generation.fitness.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-	public List <Usuario> findAllByNomeContainingIgnoreCase
-	(@Param("nome") String nome);
+	public List <Usuario> findAllByNomeContainingIgnoreCase(@Param("nome") String nome);
 
+	public Usuario findByUsuario(String usuario);
 }

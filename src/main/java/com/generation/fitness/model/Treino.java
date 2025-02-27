@@ -2,15 +2,8 @@ package com.generation.fitness.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
-import jakarta.persistence.GeneratedValue;
-
-import jakarta.persistence.GenerationType;
-
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -36,7 +29,7 @@ public class Treino{
 	@NotNull(message = "Esse campo é obrigatório")
 	@Min (1) 
 	@Max (50)
-	private Integer num_serie;
+	private Integer serie;
 	
 
 	@NotBlank(message = "Esse campo é obrigatório")
@@ -52,8 +45,7 @@ public class Treino{
 	@JsonIgnoreProperties("treinos")
 	private Usuario usuario;
 
-//Getters e Setters
-
+	//Getters e Setters
 	public Long getId() {
 
 		return id;
@@ -78,16 +70,12 @@ public class Treino{
 
 	}
 
-	public Integer getNum_serie() {
-
-		return num_serie;
-
+	public Integer getSerie() {
+		return serie;
 	}
 
-	public void setNum_serie(Integer num_serie) {
-
-		this.num_serie = num_serie;
-
+	public void setSerie(Integer serie) {
+		this.serie = serie;
 	}
 
 	public String getCarga() {

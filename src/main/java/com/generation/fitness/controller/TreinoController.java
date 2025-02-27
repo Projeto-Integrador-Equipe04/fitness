@@ -28,7 +28,6 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/treinos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-
 public class TreinoController {
 	
 	@Autowired
